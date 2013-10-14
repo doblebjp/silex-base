@@ -21,11 +21,6 @@
     "symfony/security": "~2.3",
     "symfony/validator": "~2.3"
   },
-  "scripts": {
-    "post-install-cmd": [
-      "SilexMax\\Composer\\Callback::postInstall"
-    ]
-  },
   "autoload": {
     "psr-0": {
       "SilexMax": "src/",
