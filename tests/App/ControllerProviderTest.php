@@ -1,7 +1,7 @@
 <?php
 
-use SilexMax\Tests\WebTestCase;
-use SilexMax\ControllerProvider;
+use App\Tests\WebTestCase;
+use App\ControllerProvider;
 
 class ControllerProviderTest extends WebTestCase
 {

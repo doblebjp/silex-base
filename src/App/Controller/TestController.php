@@ -1,9 +1,11 @@
 <?php
 
-namespace SilexMax\Controller;
+namespace App\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
+use SilexMax\Controller\TwigInterface;
+use SilexMax\Controller\TwigTrait;
 
 class TestController implements TwigInterface
 {

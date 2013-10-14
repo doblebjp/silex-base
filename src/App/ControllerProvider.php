@@ -1,6 +1,6 @@
 <?php
 
-namespace SilexMax;
+namespace App;
 
 use Silex\Application as SilexApp;
 use Silex\ControllerProviderInterface;
