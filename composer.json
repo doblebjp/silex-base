@@ -19,7 +19,8 @@
     "symfony/browser-kit": "~2.3",
     "symfony/css-selector": "~2.3",
     "symfony/security": "~2.3",
-    "symfony/validator": "~2.3"
+    "symfony/validator": "~2.3",
+    "symfony/finder": "~2.3"
   },
   "autoload": {
     "psr-0": {
