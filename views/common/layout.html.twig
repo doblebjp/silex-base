@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}ShareBucks{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% stylesheets "@bootstrap_css" "@custom_css" filter="?yui_css" output="/assets/css/styles-combined.min.css" %}
+    <link href="{{ asset_url }}" rel="stylesheet">
+    {% endstylesheets %}
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet'>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    {% block body %}
+    {% include 'common/navbar.html.twig' %}
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+    {% include 'common/footer.html.twig' %}
+    {% endblock %}
+
+    {% block scripts %}
+    <script src="//code.jquery.com/jquery.js"></script>
+    {% javascripts "@custom_js" "@bootstrap_js" filter="?yui_js" output="/assets/js/scripts-combined.min.js" %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {% if app.debug %}<script src="/assets/js/holder.js"></script>{% endif %}
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,30 @@
+# app
+debug: false
+
+# resources
+template_dir: %root_dir%/views
+log_dir:      %root_dir%/data/log
+cache_dir:    %root_dir%/data/cache
+assets_dir:   %root_dir%/assets
+web_dir:      %root_dir%/web
+twbs_dir:     %root_dir%/vendor/twbs/bootstrap
+
+# monolog
+monolog.logfile: %root_dir%/data/log/app.log
+
+# dbal
+db.options:
+  driver:   pdo_mysql
+  dbname:   DB_NAME
+  host:     DB_HOST
+  user:     DB_USER
+  password: DB_PASSWORD
+  charset:  utf8
+
+# orm
+orm.proxies_dir: %root_dir%/data/cache/doctrine
+orm.em.options:
+  mappings:
+    - type: annotation
+      namespace:
+      path:
