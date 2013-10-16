@@ -23,6 +23,7 @@
     "symfony/validator": "~2.3",
     "symfony/finder": "~2.3"
   },
+  "bin": ["bin/silex-max", "bin/silex-max.php"],
   "autoload": {
     "psr-0": {
       "SilexMax": "src/",
