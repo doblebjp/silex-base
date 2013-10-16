@@ -12,6 +12,7 @@
     "monolog/monolog": "~1.6",
     "mheap/silex-assetic": "~1.0",
     "twbs/bootstrap": "~3.0",
+    "knplabs/console-service-provider": "dev-master",
     "leafo/lessphp": "~0.4",
     "symfony/twig-bridge": "~2.3",
     "symfony/form": "~2.3",

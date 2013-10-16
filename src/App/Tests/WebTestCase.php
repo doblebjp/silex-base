@@ -3,8 +3,6 @@
 namespace App\Tests;
 
 use Silex\WebTestCase as SilexWebTestCase;
-use Silex\Provider\TwigServiceProvider;
-use Silex\Provider\ServiceControllerServiceProvider;
 
 class WebTestCase extends SilexWebTestCase
 {
