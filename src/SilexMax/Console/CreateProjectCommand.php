@@ -16,19 +16,19 @@ class CreateProjectCommand extends Command
         $this
             ->setName('silex-max:project:create')
             ->setDescription('Create project')
-            ->addArgument('dir', InputArgument::REQUIRED, 'Specify project root directory');
+            ->addArgument('dir', InputArgument::REQUIRED, 'Specify destination directory');
     }
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $dir = $input->getArgument('dir');
         if (strpos($dir, '/') !== 0) {
-            $dir = getcwd() . '/' . $dir;
+            $dir = $this->getProjectDirectory() . '/' . $dir;
         }
         $dir = realpath($dir);
 
         if (!$dir) {
-            throw new \RuntimeException("Invalid project directory");
+            throw new \RuntimeException("Invalid destination directory");
         }
 
         $dialog = $this->getHelperSet()->get('dialog');
