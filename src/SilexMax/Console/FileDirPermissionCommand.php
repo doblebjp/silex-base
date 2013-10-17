@@ -41,8 +41,11 @@ class FileDirPermissionCommand extends Command
             ->path('data/cache')
             ->path('data/log')
             ->path('data/sqlite')
-            ->path('web/assets')
             ->sortByName();
+
+        if ($dialog->askConfirmation($output, 'Include public web assets? (y/n) ')) {
+            $finder->path('web/assets');
+        }
 
         foreach ($finder as $dir) {
             $permission = substr(sprintf('%o', $dir->getPerms()), -4);
