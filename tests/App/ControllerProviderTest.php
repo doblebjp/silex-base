@@ -1,6 +1,6 @@
 <?php
 
-use App\Tests\WebTestCase;
+use App\Test\WebTestCase;
 use App\ControllerProvider;
 
 class ControllerProviderTest extends WebTestCase

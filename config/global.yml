@@ -26,5 +26,5 @@ orm.proxies_dir: %root_dir%/data/cache/doctrine
 orm.em.options:
   mappings:
     - type: annotation
-      namespace:
-      path:
+      namespace: App\Entity
+      path: %root_dir%/src/App/Entity
