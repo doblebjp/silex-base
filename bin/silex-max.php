@@ -25,6 +25,7 @@ $console->setHelperSet(new HelperSet([
 
 $console->addCommands([
     new SilexMax\Console\CreateProjectCommand(),
+    new SilexMax\Console\FileDirPermissionCommand(),
     new SilexMax\Console\AssetDumpCommand(),
 ]);
 
