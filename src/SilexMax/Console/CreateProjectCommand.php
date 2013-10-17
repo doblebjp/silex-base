@@ -21,7 +21,22 @@ class CreateProjectCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $dir = realpath($input->getArgument('dir'));
+        $dir = $input->getArgument('dir');
+        if (strpos($dir, '/') !== 0) {
+            $dir = getcwd() . '/' . $dir;
+        }
+        $dir = realpath($dir);
+
+        if (!$dir) {
+            throw new \RuntimeException("Invalid project directory");
+        }
+
+        $dialog = $this->getHelperSet()->get('dialog');
+
+        if (!$dialog->askConfirmation($output, "Create project in $dir ? (y/n) ")) {
+            $output->writeln('Exiting');
+            return;
+        }
 
         $finder = new Finder();
         $finder
