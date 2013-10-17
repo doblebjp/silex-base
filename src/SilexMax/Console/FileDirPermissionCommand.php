@@ -33,33 +33,34 @@ class FileDirPermissionCommand extends Command
             return;
         }
 
+        $app = $this->getSilexApplication();
+
         $finder = new Finder();
         $finder
             ->in($dir)
-            ->directories()
-            ->depth(1)
-            ->path('data/cache')
-            ->path('data/log')
-            ->path('data/sqlite')
+            ->path(substr($app['cache_dir'], strlen($dir) + 1))
+            ->path(substr($app['log_dir'], strlen($dir) + 1))
+            ->path(substr($app['monolog.logfile'], strlen($dir) + 1))
             ->sortByName();
 
         if ($dialog->askConfirmation($output, 'Include public web assets? (y/n) ')) {
-            $finder->path('web/assets');
+            $finder->path(substr($app['web_dir'], strlen($dir) + 1) . '/assets');
         }
 
-        foreach ($finder as $dir) {
-            $permission = substr(sprintf('%o', $dir->getPerms()), -4);
+        foreach ($finder as $file) {
+            $permission = substr(sprintf('%o', $file->getPerms()), -4);
 
             $output->write($permission . ' ');
 
-            if ('0777' === $permission) {
-                $output->write('<comment>skip</comment>  ');
+            if ($file->isFile()) {
+                chmod($file->getPathname(), 0666);
+                $output->write('<info>0666</info> ');
             } else {
-                $output->write('<info>chmod</info> ');
-                chmod($dir->getPathname(), 0777);
+                chmod($file->getPathname(), 0777);
+                $output->write('<info>0777</info> ');
             }
 
-            $output->writeln($dir->getRelativePathname());
+            $output->writeln($file->getRelativePathname());
         }
     }
 }
