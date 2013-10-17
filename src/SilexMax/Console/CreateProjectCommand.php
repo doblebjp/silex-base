@@ -41,15 +41,38 @@ class CreateProjectCommand extends Command
         $finder = new Finder();
         $finder
             ->in(__DIR__ . '/../../../')
-            ->ignoreVCS(false)
-            ->notPath('/data\/(cache|log|sqlite)\/[^\.].+/')
-            ->notName('composer.*')
+            ->ignoreDotFiles(false)
+              // excluding some directories
             ->exclude('src/SilexMax')
             ->exclude('vendor')
+              // excluding these directory contents which are not dotfiles
+            ->notPath('/data\/(cache|log|sqlite)\/[^\.].+/')
             ->notPath('/web\/assets\/[^\.].+/')
+              // files
+            ->notName('composer.*')
+            ->name('.git*')
+            ->name('.htaccess')
+            ->name('*')
             ->sortByName();
 
         foreach ($finder as $file) {
+            $pathname = $dir . '/' . $file->getRelativePathname();
+            $exists = file_exists($pathname);
+
+            if (!$exists) {
+                if ($file->isFile()) {
+                    $output->write('<info>copy</info>  ');
+                    copy($file->getPathname(), $pathname);
+                } elseif ($file->isDir()) {
+                    $output->write('<info>mkdir</info> ');
+                    mkdir($pathname);
+                } else {
+                    $output->write('<comment>skip</comment>  ');
+                }
+            } else {
+               $output->write('<comment>skip</comment>  ');
+            }
+
             $output->writeln($file->getRelativePathname());
         }
 
