@@ -58,12 +58,13 @@ class CreateProjectCommand extends Command
 
         foreach ($finder as $file) {
             $pathname = $dir . '/' . $file->getRelativePathname();
+            $pathname = preg_replace('/\.dist$/', '', $pathname);
             $exists = file_exists($pathname);
 
             if (!$exists) {
                 if ($file->isFile()) {
                     $output->write('<info>copy</info>  ');
-                    copy($file->getPathname(), preg_replace('/\.dist$/', '', $pathname));
+                    copy($file->getPathname(), $pathname);
                 } elseif ($file->isDir()) {
                     $output->write('<info>mkdir</info> ');
                     mkdir($pathname);
