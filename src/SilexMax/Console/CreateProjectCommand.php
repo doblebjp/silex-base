@@ -40,7 +40,7 @@ class CreateProjectCommand extends Command
 
         $finder = new Finder();
         $finder
-            ->in(__DIR__ . '/../../../')
+            ->in(__DIR__ . '/../../..')
             ->ignoreDotFiles(false)
               // excluding some directories
             ->exclude('src/SilexMax')
@@ -59,25 +59,31 @@ class CreateProjectCommand extends Command
             ->filter(function ($file) {
                 return !file_exists($file->getRealPath() . '.dist');
             })
+              // skip existing files
+            ->filter(function ($file) use ($dir) {
+                $pathname = $dir . '/' . $file->getRelativePathname();
+                $pathname = preg_replace('/\.dist$/', '', $pathname);
+                return !file_exists($pathname);
+            })
             ->sortByName();
+
+        if (count($finder) === 0) {
+            $output->writeln('Nothing to copy');
+            return;
+        }
 
         foreach ($finder as $file) {
             $pathname = $dir . '/' . $file->getRelativePathname();
             $pathname = preg_replace('/\.dist$/', '', $pathname);
-            $skip = file_exists($pathname);
 
-            if (!$skip) {
-                if ($file->isFile()) {
-                    $output->write('<info>copy</info>  ');
-                    copy($file->getPathname(), $pathname);
-                } elseif ($file->isDir()) {
-                    $output->write('<info>mkdir</info> ');
-                    mkdir($pathname);
-                } else {
-                    $output->write('<comment>skip</comment>  ');
-                }
+            if ($file->isFile()) {
+                $output->write('<info>copy</info>  ');
+                copy($file->getPathname(), $pathname);
+            } elseif ($file->isDir()) {
+                $output->write('<info>mkdir</info> ');
+                mkdir($pathname);
             } else {
-               $output->write('<comment>skip</comment>  ');
+                $output->write('<comment>skip</comment>  ');
             }
 
             $output->writeln($file->getRelativePathname());
