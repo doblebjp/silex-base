@@ -63,7 +63,7 @@ class CreateProjectCommand extends Command
             if (!$exists) {
                 if ($file->isFile()) {
                     $output->write('<info>copy</info>  ');
-                    copy($file->getPathname(), $pathname);
+                    copy($file->getPathname(), preg_replace('/\.dist$/', '', $pathname));
                 } elseif ($file->isDir()) {
                     $output->write('<info>mkdir</info> ');
                     mkdir($pathname);
