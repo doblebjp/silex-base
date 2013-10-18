@@ -48,20 +48,25 @@ class CreateProjectCommand extends Command
               // excluding these directory contents which are not dotfiles
             ->notPath('/data\/(cache|log|sqlite)\/[^\.].+/')
             ->notPath('/web\/assets\/[^\.].+/')
+              // exclude files
             ->notPath('bin/silex-max')
-              // files
             ->notName('composer.*')
+              // include files
+            ->name('*')
             ->name('.git*')
             ->name('.htaccess')
-            ->name('*')
+              // exclude files that have .dist copy
+            ->filter(function ($file) {
+                return !file_exists($file->getRealPath() . '.dist');
+            })
             ->sortByName();
 
         foreach ($finder as $file) {
             $pathname = $dir . '/' . $file->getRelativePathname();
             $pathname = preg_replace('/\.dist$/', '', $pathname);
-            $exists = file_exists($pathname);
+            $skip = file_exists($pathname);
 
-            if (!$exists) {
+            if (!$skip) {
                 if ($file->isFile()) {
                     $output->write('<info>copy</info>  ');
                     copy($file->getPathname(), $pathname);
