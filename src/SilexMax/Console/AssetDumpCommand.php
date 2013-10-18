@@ -21,6 +21,7 @@ class AssetDumpCommand extends Command
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $app = $this->getSilexApplication();
+        $app->register(new TemplatingServiceProvider());
 
         // Twig assets
         $output->write('Building assets ... ');
