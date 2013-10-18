@@ -39,6 +39,7 @@ class FileDirPermissionCommand extends Command
         $finder = new Finder();
         $finder
             ->in($projectDir)
+            ->notPath('vendor')
             ->path(substr($app['cache_dir'], strlen($baseDir) + 1))
             ->path(substr($app['log_dir'], strlen($baseDir) + 1))
             ->path(substr($app['monolog.logfile'], strlen($baseDir) + 1))
