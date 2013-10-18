@@ -20,15 +20,16 @@ class FileDirPermissionCommand extends Command
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $dir = realpath($this->getProjectDirectory());
+        $projectDir = realpath($this->getProjectDirectory());
+        $baseDir = realpath(__DIR__ . '/../../..');
 
-        if (!$dir) {
+        if (!$projectDir) {
             throw new \RuntimeException("Invalid destination directory");
         }
 
         $dialog = $this->getHelperSet()->get('dialog');
 
-        if (!$dialog->askConfirmation($output, "Update permissions in $dir ? (y/n) ")) {
+        if (!$dialog->askConfirmation($output, "Update permissions in $projectDir ? (y/n) ")) {
             $output->writeln('Exiting');
             return;
         }
@@ -37,14 +38,14 @@ class FileDirPermissionCommand extends Command
 
         $finder = new Finder();
         $finder
-            ->in($dir)
-            ->path(substr($app['cache_dir'], strlen($dir) + 1))
-            ->path(substr($app['log_dir'], strlen($dir) + 1))
-            ->path(substr($app['monolog.logfile'], strlen($dir) + 1))
+            ->in($projectDir)
+            ->path(substr($app['cache_dir'], strlen($baseDir) + 1))
+            ->path(substr($app['log_dir'], strlen($baseDir) + 1))
+            ->path(substr($app['monolog.logfile'], strlen($baseDir) + 1))
             ->sortByName();
 
         if ($dialog->askConfirmation($output, 'Include public web assets? (y/n) ')) {
-            $finder->path(substr($app['web_dir'], strlen($dir) + 1) . '/assets');
+            $finder->path(substr($app['web_dir'], strlen($baseDir) + 1) . '/assets');
         }
 
         foreach ($finder as $file) {

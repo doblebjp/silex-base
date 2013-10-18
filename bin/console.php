@@ -11,7 +11,8 @@ use Knp\Provider\ConsoleServiceProvider;
 $app->register(new ConsoleServiceProvider(), [
     'console.name'              => 'SilexMax Console',
     'console.version'           => '1.0',
-    'console.project_directory' => getcwd(),
+    /***/ 'console.project_directory' => getcwd(),
+    ///// 'console.project_directory' => __DIR__,
 ]);
 
 $console = $app['console'];
