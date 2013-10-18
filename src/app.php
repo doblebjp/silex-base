@@ -12,7 +12,9 @@ $app->register(new ConfigServiceProvider(__DIR__ . "/../config/global.yml", [
 ]));
 
 if (file_exists($local = __DIR__ . '/../config/local.yml')) {
-    $app->register(new ConfigServiceProvider($local));
+    $app->register(new ConfigServiceProvider($local, [
+        'root_dir' => realpath(__DIR__ . '/..')
+    ]));
 }
 
 return $app;
