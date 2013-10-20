@@ -13,6 +13,7 @@ use Assetic\Filter\LessphpFilter;
 use Assetic\Asset\AssetCache;
 use Assetic\Asset\GlobAsset;
 use Assetic\Asset\FileAsset;
+use Assetic\Asset\AssetCollection;
 use Assetic\Cache\FilesystemCache;
 
 class TemplatingServiceProvider implements ServiceProviderInterface
@@ -52,7 +53,20 @@ class TemplatingServiceProvider implements ServiceProviderInterface
             $am->get('bootstrap_css')->setTargetPath('assets/css/bootstrap.css');
 
             $am->set('bootstrap_js', new AssetCache(
-                new GlobAsset($app['twbs_dir'] . '/js/*.js'),
+                new AssetCollection([
+                    new FileAsset($app['twbs_dir'] . '/js/affix.js'),
+                    new FileAsset($app['twbs_dir'] . '/js/alert.js'),
+                    new FileAsset($app['twbs_dir'] . '/js/button.js'),
+                    new FileAsset($app['twbs_dir'] . '/js/carousel.js'),
+                    new FileAsset($app['twbs_dir'] . '/js/collapse.js'),
+                    new FileAsset($app['twbs_dir'] . '/js/dropdown.js'),
+                    new FileAsset($app['twbs_dir'] . '/js/modal.js'),
+                    new FileAsset($app['twbs_dir'] . '/js/scrollspy.js'),
+                    new FileAsset($app['twbs_dir'] . '/js/tab.js'),
+                    new FileAsset($app['twbs_dir'] . '/js/tooltip.js'),
+                    new FileAsset($app['twbs_dir'] . '/js/popover.js'),
+                    new FileAsset($app['twbs_dir'] . '/js/transition.js'),
+                ]),
                 new FilesystemCache($app['cache_dir'] . '/assetic')
             ));
             $am->get('bootstrap_js')->setTargetPath('assets/js/bootstrap.js');
