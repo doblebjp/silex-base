@@ -1,4 +1,4 @@
-<!doctype html>
+{% block html %}{% if app.request.isXmlHttpRequest %}{{ block('content') }}{% else %}<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -34,4 +34,4 @@
     {% if app.debug %}<script src="/assets/js/holder.js"></script>{% endif %}
     {% endblock %}
   </body>
-</html>
+</html>{% endif %}{% endblock %}
