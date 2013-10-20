@@ -6,6 +6,7 @@ use Silex\Application;
 use Silex\ServiceProviderInterface;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
+use Silex\Provider\TranslationServiceProvider;
 use SilexAssetic\AsseticServiceProvider;
 use Assetic\Filter\Yui\CssCompressorFilter;
 use Assetic\Filter\Yui\JsCompressorFilter;
@@ -26,6 +27,26 @@ class TemplatingServiceProvider implements ServiceProviderInterface
                 'cache' => $app['cache_dir'] . '/twig',
             ],
         ]);
+
+        $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
+            $twig->addFilter(new \Twig_SimpleFilter('add_class', function ($attr, $class) {
+                $attr = (array) $attr;
+                if (!isset($attr['class'])) {
+                    $attr['class'] = $class;
+                } else {
+                    $classes = explode(' ', $attr['class'] . " $class");
+                    $classes = array_filter($classes);
+                    $classes = array_unique($classes);
+                    $attr['class'] = implode(' ', $classes);
+                }
+
+                return $attr;
+            }));
+
+            return $twig;
+        }));
+
+        $app->register(new TranslationServiceProvider());
         $app->register(new UrlGeneratorServiceProvider());
         $app->register(new AsseticServiceProvider());
 

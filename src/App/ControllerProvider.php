@@ -18,6 +18,9 @@ class ControllerProvider implements ControllerProviderInterface
         $controllers->get('/', 'test.controller:test')
             ->bind('homepage');
 
+        $controllers->match('/form-horizontal', 'test.controller:testFormHorizontal')
+            ->bind('form_horizontal');
+
         return $controllers;
     }
 }
