@@ -29,7 +29,7 @@ class TemplatingServiceProvider implements ServiceProviderInterface
         ]);
 
         $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
-            $twig->addFilter(new \Twig_SimpleFilter('add_class', function ($attr, $class) {
+            $twig->addFilter(new \Twig_SimpleFilter('class', function ($attr, $class) {
                 $attr = (array) $attr;
                 if (!isset($attr['class'])) {
                     $attr['class'] = $class;

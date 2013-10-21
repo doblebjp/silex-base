@@ -2,9 +2,9 @@
 
 {% block form_widget_simple %}
 {% spaceless %}
-  {% set wrap_attr = wrap_attr|default({}) %}
-  {% set attr = attr|add_class('form-control') %}
-  <div{% for attrname, attrvalue in wrap_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+  {% set attr = attr|class('form-control') %}
+  {% set div_attr = div_attr|default({})|class('col-md-3') %}
+  <div{% for attrname, attrvalue in div_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
     {{ parent() }}
   </div>
 {% endspaceless %}
@@ -22,7 +22,7 @@
 
 {% block form_start %}
 {% spaceless %}
-  {% set attr = attr|add_class('form-horizontal') %}
+  {% set attr = attr|default({role: 'form'})|class('form-horizontal') %}
   {{ parent() }}
 {% endspaceless %}
 {% endblock form_start %}
@@ -39,16 +39,16 @@
 
 {% block form_label %}
 {% spaceless %}
-  {% set label_attr = label_attr|add_class('control-label') %}
+  {% set label_attr = label_attr|class('control-label col-md-2') %}
   {{ parent() }}
 {% endspaceless %}
 {% endblock form_label %}
 
 {% block choice_widget_collapsed %}
 {% spaceless %}
-  {% set wrap_attr = wrap_attr|default({}) %}
-  {% set attr = attr|add_class('form-control') %}
-  <div{% for attrname, attrvalue in wrap_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+  {% set attr = attr|class('form-control') %}
+  {% set div_attr = div_attr|default({})|class('col-md-3') %}
+  <div{% for attrname, attrvalue in div_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
     {{ parent() }}
   </div>
 {% endspaceless %}
@@ -56,9 +56,9 @@
 
 {% block textarea_widget %}
 {% spaceless %}
-  {% set wrap_attr = wrap_attr|default({}) %}
-  {% set attr = attr|add_class('form-control') %}
-  <div{% for attrname, attrvalue in wrap_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+  {% set attr = attr|class('form-control') %}
+  {% set div_attr = div_attr|default({})|class('col-md-3') %}
+  <div{% for attrname, attrvalue in div_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
     {{ parent() }}
   </div>
 {% endspaceless %}
