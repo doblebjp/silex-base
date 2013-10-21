@@ -18,9 +18,19 @@ class Foo
     protected $name;
 
     /**
+     * @Column(type="text", nullable=true)
+     */
+    protected $about;
+
+    /**
+     * @Column(type="datetime", nullable=true)
+     */
+    protected $createdAt;
+
+    /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -43,10 +53,61 @@ class Foo
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set about
+     *
+     * @param string $about
+     * @return Foo
+     */
+    public function setAbout($about)
+    {
+        $this->about = $about;
+
+        return $this;
+    }
+
+    /**
+     * Get about
+     *
+     * @return string
+     */
+    public function getAbout()
+    {
+        return $this->about;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Foo
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->name;
     }
 }

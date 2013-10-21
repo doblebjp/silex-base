@@ -21,7 +21,9 @@
     "symfony/validator": "~2.3",
     "symfony/finder": "~2.3",
     "symfony/translation": "~2.3",
-    "symfony/config": "~2.3"
+    "symfony/config": "~2.3",
+    "symfony/doctrine-bridge": "~2.3",
+    "dominikzogg/doctrine-orm-manager-registry-provider": "~1.2"
   },
   "require-dev": {
     "doctrine/data-fixtures": "~1.0",

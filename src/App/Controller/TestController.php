@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Foo;
 
 class TestController
 {
@@ -18,8 +19,11 @@ class TestController
 
     public function testFormHorizontal(Application $app)
     {
-        $form = $app['form.factory']->createBuilder('form')
-            ->add('name', 'text')
+        $foo = new Foo();
+        $form = $app['form.factory']->createBuilder('form', $foo)
+            ->add('name')
+            ->add('about')
+            ->add('createdAt')
             ->getForm();
 
         return $app->render('test_form_horizontal.html.twig', [

@@ -46,6 +46,12 @@ class TemplatingServiceProvider implements ServiceProviderInterface
             return $twig;
         }));
 
+        $app['twig.loader.filesystem'] = $app->share($app->extend('twig.loader.filesystem', function ($loader, $app) {
+            $loader->addPath(__DIR__ . '/../Resources/views', 'SilexMax');
+
+            return $loader;
+        }));
+
         $app->register(new TranslationServiceProvider());
         $app->register(new UrlGeneratorServiceProvider());
         $app->register(new AsseticServiceProvider());
