@@ -29,25 +29,13 @@ class TemplatingServiceProvider implements ServiceProviderInterface
         ]);
 
         $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
-            $twig->addFilter(new \Twig_SimpleFilter('class', function ($attr, $class) {
-                $attr = (array) $attr;
-                if (!isset($attr['class'])) {
-                    $attr['class'] = $class;
-                } else {
-                    $classes = explode(' ', $attr['class'] . " $class");
-                    $classes = array_filter($classes);
-                    $classes = array_unique($classes);
-                    $attr['class'] = implode(' ', $classes);
-                }
-
-                return $attr;
-            }));
+            $twig->addFilter(new \Twig_SimpleFilter('class_default', ['SilexMax\Twig\ClassFilter', 'classDefault']));
 
             return $twig;
         }));
 
         $app['twig.loader.filesystem'] = $app->share($app->extend('twig.loader.filesystem', function ($loader, $app) {
-            $loader->addPath(__DIR__ . '/../Resources/views', 'SilexMax');
+            $loader->addPath(__DIR__ . '/../Twig/views', 'SilexMax');
 
             return $loader;
         }));
