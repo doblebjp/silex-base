@@ -66,32 +66,63 @@
 
 {% block date_widget %}
 {% spaceless %}
-    {% if widget == 'single_text' %}
-        {{ block('form_widget_simple') }}
-    {% else %}
-        <div {{ block('widget_container_attributes') }}>
-            {{ date_pattern|replace({
-                '{{ year }}':  form_widget(form.year, {div_attr: {class: 'col-md-1'}}),
-                '{{ month }}': form_widget(form.month, {div_attr: {class: 'col-md-1'}}),
-                '{{ day }}':   form_widget(form.day, {div_attr: {class: 'col-md-1'}}),
-            })|raw }}
-        </div>
-    {% endif %}
+  {% if widget == 'single_text' %}
+    {{ block('form_widget_simple') }}
+  {% else %}
+    <div {{ block('widget_container_attributes') }}>
+      {{ date_pattern|replace({
+        '{{ year }}':  form_widget(form.year, {div_attr: {class: 'col-md-1'}}),
+        '{{ month }}': form_widget(form.month, {div_attr: {class: 'col-md-1'}}),
+        '{{ day }}':   form_widget(form.day, {div_attr: {class: 'col-md-1'}}),
+      })|raw }}
+    </div>
+  {% endif %}
 {% endspaceless %}
 {% endblock date_widget %}
 
 {% block time_widget %}
 {% spaceless %}
-    {% if widget == 'single_text' %}
-        {{ block('form_widget_simple') }}
-    {% else %}
-        {% set vars = widget == 'text' ? { 'attr': { 'size': 1 }} : {div_attr: {class: 'col-md-1'}} %}
-        <div {{ block('widget_container_attributes') }}>
-            {{ form_widget(form.hour, vars) }}{% if with_minutes %}{{ form_widget(form.minute, vars) }}{% endif %}{% if with_seconds %}:{{ form_widget(form.second, vars) }}{% endif %}
-        </div>
-    {% endif %}
+  {% if widget == 'single_text' %}
+    {{ block('form_widget_simple') }}
+  {% else %}
+    {% set vars = widget == 'text' ? { 'attr': { 'size': 1 }} : {div_attr: {class: 'col-md-1'}} %}
+    <div {{ block('widget_container_attributes') }}>
+      {{ form_widget(form.hour, vars) }}{% if with_minutes %}{{ form_widget(form.minute, vars) }}{% endif %}{% if with_seconds %}:{{ form_widget(form.second, vars) }}{% endif %}
+    </div>
+  {% endif %}
 {% endspaceless %}
 {% endblock time_widget %}
+
+{% block choice_widget_expanded %}
+{% spaceless %}
+  {% set attr = attr|merge({class: attr.class|default('')|class_default('col-md-3')}) %}
+  <div {{ block('widget_container_attributes') }}>
+  {% for child in form %}
+    {{ form_widget(child) }}
+  {% endfor %}
+  </div>
+{% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+{% block radio_widget %}
+{% spaceless %}
+  <div class="radio">
+    <label>
+      {{ parent() }} {{ label }}
+    </label>
+  </div>
+{% endspaceless %}
+{% endblock radio_widget %}
+
+{% block checkbox_widget %}
+{% spaceless %}
+  <div class="checkbox">
+    <label>
+      {{ parent() }} {{ label }}
+    </label>
+  </div>
+{% endspaceless %}
+{% endblock checkbox_widget %}
 
 {% block form_errors %}
 {% spaceless %}
