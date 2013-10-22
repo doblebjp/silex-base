@@ -23,9 +23,24 @@ class Foo
     protected $about;
 
     /**
-     * @Column(type="datetime", nullable=true)
+     * @Column(type="datetime")
      */
     protected $createdAt;
+
+    /**
+     * @OneToMany(targetEntity="Foo", mappedBy="parent")
+     */
+    protected $children;
+
+    /**
+     * @ManyToOne(targetEntity="Foo", inversedBy="children")
+     */
+    protected $parent;
+
+    /**
+     * @Column(type="boolean")
+     */
+    protected $active = true;
 
     /**
      * Get id
@@ -109,5 +124,93 @@ class Foo
     public function __toString()
     {
         return (string) $this->name;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * Add children
+     *
+     * @param \App\Entity\Foo $children
+     * @return Foo
+     */
+    public function addChild(\App\Entity\Foo $children)
+    {
+        $this->children[] = $children;
+
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param \App\Entity\Foo $children
+     */
+    public function removeChild(\App\Entity\Foo $children)
+    {
+        $this->children->removeElement($children);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \App\Entity\Foo $parent
+     * @return Foo
+     */
+    public function setParent(\App\Entity\Foo $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \App\Entity\Foo
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return Foo
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
 }

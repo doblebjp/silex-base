@@ -24,6 +24,20 @@ class TestController
             ->add('name')
             ->add('about')
             ->add('createdAt')
+            ->add('parent')
+            ->add('active')
+            ->add('radio', 'choice', [
+                'mapped'   => false,
+                'expanded' => true,
+                'choices'  => ['one', 'two'],
+            ])
+            ->add('checkbox', 'choice', [
+                'mapped'   => false,
+                'multiple' => true,
+                'expanded' => true,
+                'choices'  => ['one', 'two'],
+            ])
+            ->add('Save', 'button')
             ->getForm();
 
         return $app->render('test_form_horizontal.html.twig', [
