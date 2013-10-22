@@ -3,7 +3,7 @@
 {% block form_widget_simple %}
 {% spaceless %}
   {% set attr = attr|merge({class: attr.class|default('')|class_default('form-control')}) %}
-  {% set div_attr = div_attr|default({})|merge({class: div_attr.class|default('')|class_default('col-md-3')}) %}
+  {% set div_attr = div_attr|default({})|merge({class: div_attr.class|default('')|class_default('col-md-8')}) %}
   <div{% for attrname, attrvalue in div_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
     {{ parent() }}
   </div>
@@ -47,7 +47,7 @@
 {% block choice_widget_collapsed %}
 {% spaceless %}
   {% set attr = attr|merge({class: attr.class|default('')|class_default('form-control')}) %}
-  {% set div_attr = div_attr|default({})|merge({class: div_attr.class|default('')|class_default('col-md-3')}) %}
+  {% set div_attr = div_attr|default({})|merge({class: div_attr.class|default('')|class_default('col-md-8')}) %}
   <div{% for attrname, attrvalue in div_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
     {{ parent() }}
   </div>
@@ -57,7 +57,7 @@
 {% block textarea_widget %}
 {% spaceless %}
   {% set attr = attr|merge({class: attr.class|default('')|class_default('form-control')}) %}
-  {% set div_attr = div_attr|default({})|merge({class: div_attr.class|default('')|class_default('col-md-3')}) %}
+  {% set div_attr = div_attr|default({})|merge({class: div_attr.class|default('')|class_default('col-md-8')}) %}
   <div{% for attrname, attrvalue in div_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
     {{ parent() }}
   </div>
@@ -95,7 +95,7 @@
 
 {% block choice_widget_expanded %}
 {% spaceless %}
-  {% set attr = attr|merge({class: attr.class|default('')|class_default('col-md-3')}) %}
+  {% set attr = attr|merge({class: attr.class|default('')|class_default('col-md-8')}) %}
   <div {{ block('widget_container_attributes') }}>
   {% for child in form %}
     {{ form_widget(child) }}
