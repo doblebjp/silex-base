@@ -35,7 +35,7 @@ class TemplatingServiceProvider implements ServiceProviderInterface
         }));
 
         $app['twig.loader.filesystem'] = $app->share($app->extend('twig.loader.filesystem', function ($loader, $app) {
-            $loader->addPath(__DIR__ . '/../Twig/views', 'SilexMax');
+            $loader->addPath(__DIR__ . '/../../../views', 'SilexMax');
 
             return $loader;
         }));
