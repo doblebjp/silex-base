@@ -22,7 +22,6 @@ class AssetDumpCommand extends Command
     {
         $app = $this->getSilexApplication();
         $app->register(new TemplatingServiceProvider());
-        $app['twig']->setCache(false);
 
         // Twig assets
         $output->write('Building assets ... ');
