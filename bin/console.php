@@ -1,6 +1,6 @@
 <?php
 
-$app = require __DIR__ . '/../src/app.php';
+($app = @include __DIR__ . '/../src/app.php') || ($app = @include __DIR__ . '/../../../../src/app.php');
 
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\TableHelper;
