@@ -24,7 +24,7 @@ class TemplatingServiceProvider implements ServiceProviderInterface
         $app->register(new TwigServiceProvider(), [
             'twig.path' => $app['template_dir'],
             'twig.options' => [
-                'cache' => $app['cache_dir'] . '/twig',
+                'cache' => $app['debug'] ? false : $app['cache_dir'] . '/twig',
             ],
         ]);
 
