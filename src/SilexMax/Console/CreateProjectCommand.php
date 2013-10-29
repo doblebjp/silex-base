@@ -42,24 +42,26 @@ class CreateProjectCommand extends Command
         $finder
             ->in(__DIR__ . '/../../..')
             ->ignoreDotFiles(false)
-              // excluding some directories
+            // excluding some directories
             ->exclude('src/SilexMax')
+            ->exclude('tests/SilexMax')
             ->exclude('vendor')
-              // excluding these directory contents which are not dotfiles
+            // excluding these directory contents which are not dotfiles
             ->notPath('/data\/(cache|log|sqlite)\/[^\.].+/')
             ->notPath('/web\/assets\/[^\.].+/')
-              // exclude files
+            // exclude files
             ->notPath('bin/silex-max')
             ->notName('composer.*')
-              // include files
+            ->notName('*.md')
+            // include files
             ->name('*')
             ->name('.git*')
             ->name('.htaccess')
-              // exclude files that have .dist copy
+            // exclude files that have .dist copy
             ->filter(function ($file) {
                 return !file_exists($file->getRealPath() . '.dist');
             })
-              // skip existing files
+            // skip existing files
             ->filter(function ($file) use ($dir) {
                 $pathname = $dir . '/' . $file->getRelativePathname();
                 $pathname = preg_replace('/\.dist$/', '', $pathname);
