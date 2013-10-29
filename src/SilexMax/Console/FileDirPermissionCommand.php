@@ -21,7 +21,6 @@ class FileDirPermissionCommand extends Command
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $projectDir = realpath($this->getProjectDirectory());
-        $baseDir = realpath(__DIR__ . '/../../..');
 
         if (!$projectDir) {
             throw new \RuntimeException("Invalid destination directory");
@@ -40,13 +39,13 @@ class FileDirPermissionCommand extends Command
         $finder
             ->in($projectDir)
             ->notPath('vendor')
-            ->path(substr($app['cache_dir'], strlen($baseDir) + 1))
-            ->path(substr($app['log_dir'], strlen($baseDir) + 1))
-            ->path(substr($app['monolog.logfile'], strlen($baseDir) + 1))
+            ->path(substr($app['cache_dir'], strlen($projectDir) + 1))
+            ->path(substr($app['log_dir'], strlen($projectDir) + 1))
+            ->path(substr($app['monolog.logfile'], strlen($projectDir) + 1))
             ->sortByName();
 
         if ($dialog->askConfirmation($output, 'Include public web assets? (y/n) ')) {
-            $finder->path(substr($app['web_dir'], strlen($baseDir) + 1) . '/assets');
+            $finder->path(substr($app['web_dir'], strlen($projectDir) + 1) . '/assets');
         }
 
         foreach ($finder as $file) {
