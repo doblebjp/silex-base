@@ -16,6 +16,6 @@ class FooTest extends OrmTestCase
         $this->em->clear();
         $foo2 = $this->em->find('App\Entity\Foo', 1);
 
-        $this->assertEquals($foo, $foo2);
+        $this->assertEquals('Test', $foo2->getName());
     }
 }

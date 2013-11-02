@@ -1,21 +1,14 @@
 <?php
 
-use Silex\Provider\SecurityServiceProvider;
-use Silex\Provider\SessionServiceProvider;
-use Silex\Provider\MonologServiceProvider;
-use Silex\Provider\ServiceControllerServiceProvider;
-use SilexMax\Provider\TemplatingServiceProvider;
-use SilexMax\Provider\OrmServiceProvider;
-use SilexMax\Provider\FormServiceProvider;
-
 $app = require __DIR__ . '/../src/app.php';
 
-$app->register(new SessionServiceProvider());
-$app->register(new TemplatingServiceProvider());
-$app->register(new MonologServiceProvider());
-$app->register(new OrmServiceProvider());
-$app->register(new FormServiceProvider());
-$app->register(new ServiceControllerServiceProvider());
+$app->register(new Silex\Provider\SessionServiceProvider());
+$app->register(new Silex\Provider\MonologServiceProvider());
+$app->register(new Silex\Provider\ServiceControllerServiceProvider());
+
+$app->register(new SilexMax\Provider\TemplatingServiceProvider());
+$app->register(new SilexMax\Provider\OrmServiceProvider());
+$app->register(new SilexMax\Provider\FormServiceProvider());
 
 $app->mount('/', new App\ControllerProvider());
 
