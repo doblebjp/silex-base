@@ -29,7 +29,7 @@ class TemplatingServiceProvider implements ServiceProviderInterface
         ]);
 
         $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
-            $twig->addFilter(new \Twig_SimpleFilter('class_default', ['SilexMax\Twig\ClassFilter', 'classDefault']));
+            $twig->addFilter(new \Twig_SimpleFilter('grid', ['SilexMax\Twig\GridFilter', 'getClass']));
 
             return $twig;
         }));

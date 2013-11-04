@@ -2,8 +2,8 @@
 
 {% block form_widget_simple %}
 {% spaceless %}
-  {% set attr = attr|merge({class: attr.class|default('')|class_default('form-control')}) %}
-  {% set div_attr = div_attr|default({})|merge({class: div_attr.class|default('')|class_default('col-md-8')}) %}
+  {% set attr = attr|merge({ class: 'form-control ' ~ attr.class|default }) %}
+  {% set div_attr = div_attr|default({})|merge({ class: div_attr.class|default|grid('col-md-8') }) %}
   <div{% for attrname, attrvalue in div_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
     {{ parent() }}
   </div>
@@ -22,7 +22,7 @@
 
 {% block form_start %}
 {% spaceless %}
-  {% set attr = attr|default({role: 'form'})|merge({class: attr.class|default('')|class_default('form-horizontal')}) %}
+  {% set attr = attr|merge({ role: 'form', class: 'form-horizontal ' ~ attr.class|default }) %}
   {{ parent() }}
 {% endspaceless %}
 {% endblock form_start %}
@@ -39,15 +39,15 @@
 
 {% block form_label %}
 {% spaceless %}
-  {% set label_attr = label_attr|merge({class: label_attr.class|default('')|class_default('control-label col-md-2')}) %}
+  {% set label_attr = label_attr|merge({ class: 'control-label ' ~ label_attr.class|default|grid('col-md-2')}) %}
   {{ parent() }}
 {% endspaceless %}
 {% endblock form_label %}
 
 {% block choice_widget_collapsed %}
 {% spaceless %}
-  {% set attr = attr|merge({class: attr.class|default('')|class_default('form-control')}) %}
-  {% set div_attr = div_attr|default({})|merge({class: div_attr.class|default('')|class_default('col-md-8')}) %}
+  {% set attr = attr|merge({ class: 'form-control ' ~ attr.class|default }) %}
+  {% set div_attr = div_attr|default({})|merge({ class: div_attr.class|default|grid('col-md-8') }) %}
   <div{% for attrname, attrvalue in div_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
     {{ parent() }}
   </div>
@@ -56,8 +56,8 @@
 
 {% block textarea_widget %}
 {% spaceless %}
-  {% set attr = attr|merge({class: attr.class|default('')|class_default('form-control')}) %}
-  {% set div_attr = div_attr|default({})|merge({class: div_attr.class|default('')|class_default('col-md-8')}) %}
+  {% set attr = attr|merge({ class: 'form-control ' ~ attr.class|default }) %}
+  {% set div_attr = div_attr|default({})|merge({ class: div_attr.class|default|grid('col-md-8') }) %}
   <div{% for attrname, attrvalue in div_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
     {{ parent() }}
   </div>
@@ -71,9 +71,9 @@
   {% else %}
     <div {{ block('widget_container_attributes') }}>
       {{ date_pattern|replace({
-        '{{ year }}':  form_widget(form.year, {div_attr: {class: 'col-md-1'}}),
-        '{{ month }}': form_widget(form.month, {div_attr: {class: 'col-md-1'}}),
-        '{{ day }}':   form_widget(form.day, {div_attr: {class: 'col-md-1'}}),
+        '{{ year }}':  form_widget(form.year,  { div_attr: { class: 'col-md-1' } }),
+        '{{ month }}': form_widget(form.month, { div_attr: { class: 'col-md-1' } }),
+        '{{ day }}':   form_widget(form.day,   { div_attr: { class: 'col-md-1' } }),
       })|raw }}
     </div>
   {% endif %}
@@ -85,7 +85,7 @@
   {% if widget == 'single_text' %}
     {{ block('form_widget_simple') }}
   {% else %}
-    {% set vars = widget == 'text' ? { 'attr': { 'size': 1 }} : {div_attr: {class: 'col-md-1'}} %}
+    {% set vars = widget == 'text' ? { attr: { size: 1 } } : { div_attr: { class: 'col-md-1' } } %}
     <div {{ block('widget_container_attributes') }}>
       {{ form_widget(form.hour, vars) }}{% if with_minutes %}{{ form_widget(form.minute, vars) }}{% endif %}{% if with_seconds %}:{{ form_widget(form.second, vars) }}{% endif %}
     </div>
@@ -95,7 +95,7 @@
 
 {% block choice_widget_expanded %}
 {% spaceless %}
-  {% set attr = attr|merge({class: attr.class|default('')|class_default('col-md-8')}) %}
+  {% set attr = attr|merge({ class: attr.class|default|grid('col-md-8') }) %}
   <div {{ block('widget_container_attributes') }}>
   {% for child in form %}
     {{ form_widget(child) }}
@@ -128,7 +128,11 @@
 {% spaceless %}
     {% if errors|length > 0 %}
     {% set error = errors|first %}
-    <span class="help-block">{{ error.message }}</span>
+      {% if form.parent is empty %}
+        <div class="alert alert-danger">{{ error.message }}</div>
+      {% else %}
+        <span class="help-block">{{ error.message }}</span>
+      {% endif %}
     {% endif %}
 {% endspaceless %}
 {% endblock form_errors %}
