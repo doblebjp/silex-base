@@ -1,6 +1,7 @@
 <?php
 
-require __DIR__ . '/../src/autoload.php';
+$loader = require __DIR__ . '/../vendor/autoload.php';
+$loader->add('App', __DIR__ . '/../src');
 
 use App\Setup;
 
