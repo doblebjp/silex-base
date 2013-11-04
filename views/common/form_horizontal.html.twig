@@ -138,6 +138,23 @@
 {% endspaceless %}
 {% endblock checkbox_widget %}
 
+{% block button_widget %}
+{% spaceless %}
+  {% set attr = attr|merge({ class: 'btn ' ~ attr.class|default }) %}
+  {{ parent() }}
+{% endspaceless %}
+{% endblock button_widget %}
+
+{% block button_row %}
+{% spaceless %}
+  <div class="form-group">
+    {% set div_attr = div_attr|default({})|merge({ class: div_attr.class|default|grid('col-md-8 col-md-offset-2') }) %}
+    <div{% for attrname, attrvalue in div_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+    {{ form_widget(form) }}
+  </div>
+{% endspaceless %}
+{% endblock button_row %}
+
 {% block form_errors %}
 {% spaceless %}
     {% if errors|length > 0 %}
