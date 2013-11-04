@@ -13,7 +13,6 @@ class WebTestCase extends SilexWebTestCase
     public function createApplication()
     {
         $app = Setup::createApplication();
-        $app['debug'] = true;
 
         $app->register(new SessionServiceProvider());
         $app->register(new TemplatingServiceProvider());
@@ -23,6 +22,7 @@ class WebTestCase extends SilexWebTestCase
             'root_dir' => realpath(__DIR__ . '/../../..')
         ]);
 
+        $app['debug'] = true;
         $app['exception_handler']->disable();
         $app['session.test'] = true;
 
