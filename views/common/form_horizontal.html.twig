@@ -98,7 +98,7 @@
   {% set attr = attr|merge({ class: attr.class|default|grid('col-md-8') }) %}
   <div {{ block('widget_container_attributes') }}>
   {% for child in form %}
-    {{ form_widget(child) }}
+    {{ form_widget(child, { mode: 'choice' }) }}
   {% endfor %}
   </div>
 {% endspaceless %}
@@ -106,21 +106,35 @@
 
 {% block radio_widget %}
 {% spaceless %}
-  <div class="radio">
-    <label>
-      {{ parent() }} {{ label }}
-    </label>
-  </div>
+  {% set mode = mode|default('normal') %}
+  {% if mode == 'normal' %}
+    {% set div_attr = div_attr|default({})|merge({ class: div_attr.class|default|grid('col-md-8') }) %}
+  {% endif %}
+
+  {% if mode == 'normal' %}<div{% for attrname, attrvalue in div_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{% endif %}
+    <div class="radio">
+      <label>
+        {{ parent() }} {{ label }}
+      </label>
+    </div>
+  {% if mode == 'normal' %}</div>{% endif %}
 {% endspaceless %}
 {% endblock radio_widget %}
 
 {% block checkbox_widget %}
 {% spaceless %}
-  <div class="checkbox">
-    <label>
-      {{ parent() }} {{ label }}
-    </label>
-  </div>
+  {% set mode = mode|default('normal') %}
+  {% if mode == 'normal' %}
+    {% set div_attr = div_attr|default({})|merge({ class: div_attr.class|default|grid('col-md-8') }) %}
+  {% endif %}
+
+  {% if mode == 'normal' %}<div{% for attrname, attrvalue in div_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{% endif %}
+    <div class="checkbox">
+      <label>
+        {{ parent() }} {{ label }} {{ test|default }}
+      </label>
+    </div>
+  {% if mode == 'normal' %}</div>{% endif %}
 {% endspaceless %}
 {% endblock checkbox_widget %}
 
