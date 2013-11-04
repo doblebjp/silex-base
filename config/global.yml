@@ -12,7 +12,7 @@ twbs_dir:     %root_dir%/vendor/twbs/bootstrap
 # twig
 twig.path: %root_dir%/views
 twig.options:
-  cache: %root_dir%/data/cache
+  cache: %root_dir%/data/cache/twig
 
 # assetic
 assetic.path_to_web: %root_dir%/web

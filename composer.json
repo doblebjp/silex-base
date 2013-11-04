@@ -13,7 +13,7 @@
     "mheap/silex-assetic": "dev-fixlam",
     "twbs/bootstrap": "3.0.0",
     "knplabs/console-service-provider": "dev-master",
-    "leafo/lessphp": "dev-master",
+    "leafo/lessphp": "~0.4",
     "symfony/twig-bridge": "~2.3",
     "symfony/form": "~2.3",
     "symfony/yaml": "~2.3",
