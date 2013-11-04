@@ -1,15 +1,14 @@
 <?php
 
-$app = require __DIR__ . '/../src/app.php';
+require __DIR__ . '/../src/autoload.php';
 
-$app->register(new Silex\Provider\SessionServiceProvider());
-$app->register(new Silex\Provider\MonologServiceProvider());
-$app->register(new Silex\Provider\ServiceControllerServiceProvider());
+use App\Setup;
 
-$app->register(new SilexMax\Provider\TemplatingServiceProvider());
-$app->register(new SilexMax\Provider\OrmServiceProvider());
-$app->register(new SilexMax\Provider\FormServiceProvider());
-
-$app->mount('/', new App\ControllerProvider());
+$app = Setup::createApplication();
+Setup::registerServices($app);
+Setup::loadConfig($app, __DIR__ . '/../config', [
+    'root_dir' => realpath(__DIR__ . '/..')
+]);
+Setup::mountControllers($app);
 
 $app->run();

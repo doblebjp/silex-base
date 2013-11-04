@@ -21,12 +21,7 @@ class TemplatingServiceProvider implements ServiceProviderInterface
 {
     public function register(Application $app)
     {
-        $app->register(new TwigServiceProvider(), [
-            'twig.path' => $app['template_dir'],
-            'twig.options' => [
-                'cache' => $app['debug'] ? false : $app['cache_dir'] . '/twig',
-            ],
-        ]);
+        $app->register(new TwigServiceProvider());
 
         $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
             $twig->addFilter(new \Twig_SimpleFilter('grid', ['SilexMax\Twig\GridFilter', 'getClass']));
@@ -43,13 +38,6 @@ class TemplatingServiceProvider implements ServiceProviderInterface
         $app->register(new TranslationServiceProvider());
         $app->register(new UrlGeneratorServiceProvider());
         $app->register(new AsseticServiceProvider());
-
-        $app['assetic.path_to_web'] = $app['web_dir'];
-        $app['assetic.options'] = [
-            'debug' => $app['debug'],
-            'formulae_cache_dir' => $app['cache_dir'] . '/assetic',
-            'auto_dump_assets' => $app['debug'],
-        ];
 
         $app['assetic.filter_manager'] = $app->share($app->extend('assetic.filter_manager', function($fm, $app) {
             $fm->set('yui_css', new CssCompressorFilter('/usr/share/yui-compressor/yui-compressor.jar'));

@@ -24,6 +24,6 @@ class GridFilter
             });
         }
 
-        return implode(' ', array_merge($current, $default));
+        return trim(implode(' ', array_merge($current, $default)));
     }
 }

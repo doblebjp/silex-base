@@ -9,6 +9,18 @@ assets_dir:   %root_dir%/assets
 web_dir:      %root_dir%/web
 twbs_dir:     %root_dir%/vendor/twbs/bootstrap
 
+# twig
+twig.path: %root_dir%/views
+twig.options:
+  cache: %root_dir%/data/cache
+
+# assetic
+assetic.path_to_web: %root_dir%/web
+assetic.options:
+  debug: false
+  formulae_cache_dir: %root_dir%/data/cache/assetic
+  auto_dump_assets: false
+
 # monolog
 monolog.logfile: %root_dir%/data/log/app.log
 
