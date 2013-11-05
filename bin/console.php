@@ -8,7 +8,7 @@ if ($loader instanceof Composer\Autoload\ClassLoader) {
 } else {
     // try finding parent autoloader
     $loader = @include __DIR__ . '/../../../../vendor/autoload.php';
-    if (!$loader instanceof Composer\AutoloadClassLoader) {
+    if (!$loader instanceof Composer\Autoload\ClassLoader) {
         throw new Exception('Cannot locate autoloader');
     }
     $rootDir = realpath(__DIR__ . '/../../../..');
