@@ -150,7 +150,8 @@
   <div class="form-group">
     {% set div_attr = div_attr|default({})|merge({ class: div_attr.class|default|grid('col-md-8 col-md-offset-2') }) %}
     <div{% for attrname, attrvalue in div_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-    {{ form_widget(form) }}
+      {{ form_widget(form) }}
+    </div>
   </div>
 {% endspaceless %}
 {% endblock button_row %}
