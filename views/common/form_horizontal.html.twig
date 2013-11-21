@@ -131,7 +131,7 @@
   {% if mode == 'normal' %}<div{% for attrname, attrvalue in div_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{% endif %}
     <div class="checkbox">
       <label>
-        {{ parent() }} {{ label }} {{ test|default }}
+        {{ parent() }} {{ label }}
       </label>
     </div>
   {% if mode == 'normal' %}</div>{% endif %}
