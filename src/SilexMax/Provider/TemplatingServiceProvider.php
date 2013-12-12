@@ -44,7 +44,7 @@ class TemplatingServiceProvider implements ServiceProviderInterface
         $app['assetic.filter_manager'] = $app->share($app->extend('assetic.filter_manager', function($fm, $app) {
             $fm->set('yui_css', new CssCompressorFilter('/usr/share/yui-compressor/yui-compressor.jar'));
             $fm->set('yui_js', new JsCompressorFilter('/usr/share/yui-compressor/yui-compressor.jar'));
-            $fm->set('lessc', new LessFilter());
+            $fm->set('lessc', new LessFilter($app['node.bin'], $app['node.paths']));
             $fm->set('jpegoptim', new JpegoptimFilter());
             $fm->set('optipng', new OptiPngFilter());
             return $fm;

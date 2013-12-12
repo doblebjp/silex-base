@@ -33,6 +33,11 @@ db.options:
   password: DB_PASSWORD
   charset:  utf8
 
+# node
+node.bin: /usr/bin/node
+node.paths:
+  - /usr/local/lib/node_modules
+
 # orm
 orm.proxies_dir: %root_dir%/data/cache/doctrine
 orm.em.options:
