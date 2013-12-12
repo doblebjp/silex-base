@@ -11,8 +11,9 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
 
     <!--[if lt IE 9]>
-      <script src="/assets/js/html5shiv.js"></script>
-      <script src="/assets/js/respond.min.js"></script>
+      {% javascripts "@ie_helper" filter="?yui_js" output="assets/ie-helper.js" %}
+      <script src="/{{ asset_url }}"></script>
+      {% endjavascripts %}
     <![endif]-->
   </head>
 

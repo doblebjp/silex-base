@@ -43,20 +43,7 @@ class AssetDumpCommand extends Command
         // Helper scripts
         $output->write('Copying helper scripts ... ');
         $jsDir = $app['assetic.path_to_web'] . '/assets/js';
-        copy($app['twbs_dir'] . '/assets/js/html5shiv.js', $jsDir . '/html5shiv.js');
-        copy($app['twbs_dir'] . '/assets/js/respond.min.js', $jsDir . '/respond.min.js');
         copy($app['twbs_dir'] . '/assets/js/holder.js', $jsDir . '/holder.js');
-        $output->writeln('Done');
-
-        // Images
-        $output->write('Copying images ... ');
-        $imgDir = $app['assetic.path_to_web'] . '/assets/img';
-        if (!file_exists($imgDir) || !is_dir($imgDir)) {
-            mkdir($imgDir);
-        }
-        foreach (glob($app['assets_dir'] . '/img/*') as $img) {
-            copy($img, $imgDir . '/' . basename($img));
-        }
         $output->writeln('Done');
     }
 }

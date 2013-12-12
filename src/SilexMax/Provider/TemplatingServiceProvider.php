@@ -10,7 +10,9 @@ use Silex\Provider\TranslationServiceProvider;
 use SilexAssetic\AsseticServiceProvider;
 use Assetic\Filter\Yui\CssCompressorFilter;
 use Assetic\Filter\Yui\JsCompressorFilter;
-use Assetic\Filter\LessphpFilter;
+use Assetic\Filter\LessFilter;
+use Assetic\Filter\JpegoptimFilter;
+use Assetic\Filter\OptiPngFilter;
 use Assetic\Asset\AssetCache;
 use Assetic\Asset\GlobAsset;
 use Assetic\Asset\FileAsset;
@@ -42,7 +44,9 @@ class TemplatingServiceProvider implements ServiceProviderInterface
         $app['assetic.filter_manager'] = $app->share($app->extend('assetic.filter_manager', function($fm, $app) {
             $fm->set('yui_css', new CssCompressorFilter('/usr/share/yui-compressor/yui-compressor.jar'));
             $fm->set('yui_js', new JsCompressorFilter('/usr/share/yui-compressor/yui-compressor.jar'));
-            $fm->set('lessphp', new LessphpFilter());
+            $fm->set('lessc', new LessFilter());
+            $fm->set('jpegoptim', new JpegoptimFilter());
+            $fm->set('optipng', new OptiPngFilter());
             return $fm;
         }));
 
@@ -50,7 +54,7 @@ class TemplatingServiceProvider implements ServiceProviderInterface
             $fm = $app['assetic.filter_manager'];
 
             $am->set('bootstrap_css', new AssetCache(
-                new FileAsset($app['twbs_dir'] . '/less/bootstrap.less', [$fm->get('lessphp')]),
+                new FileAsset($app['twbs_dir'] . '/less/bootstrap.less', [$fm->get('lessc')]),
                 new FilesystemCache($app['cache_dir'] . '/assetic')
             ));
             $am->get('bootstrap_css')->setTargetPath('assets/css/bootstrap.css');
@@ -75,7 +79,7 @@ class TemplatingServiceProvider implements ServiceProviderInterface
             $am->get('bootstrap_js')->setTargetPath('assets/js/bootstrap.js');
 
             $am->set('custom_css', new AssetCache(
-                new FileAsset($app['assets_dir'] . '/less/custom.less', [$fm->get('lessphp')]),
+                new FileAsset($app['assets_dir'] . '/less/custom.less', [$fm->get('lessc')]),
                 new FilesystemCache($app['cache_dir'] . '/assetic')
             ));
             $am->get('custom_css')->setTargetPath('assets/css/custom.css');
@@ -85,6 +89,15 @@ class TemplatingServiceProvider implements ServiceProviderInterface
                 new FilesystemCache($app['cache_dir'] . '/assetic')
             ));
             $am->get('custom_js')->setTargetPath('assets/js/custom.js');
+
+            $am->set('ie_helper', new AssetCache(
+                new AssetCollection([
+                    new FileAsset($app['twbs_dir'] . '/assets/js/html5shiv.js'),
+                    new FileAsset($app['twbs_dir'] . '/assets/js/respond.min.js'),
+                ]),
+                new FilesystemCache($app['cache_dir'] . '/assetic')
+            ));
+            $am->get('ie_helper')->setTargetPath('assets/js/ie-helper.js');
 
             return $am;
         }));
