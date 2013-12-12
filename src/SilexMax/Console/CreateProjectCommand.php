@@ -49,6 +49,7 @@ class CreateProjectCommand extends Command
             // excluding these directory contents which are not dotfiles
             ->notPath('/data\/(cache|log|sqlite)\/[^\.].+/')
             ->notPath('/web\/assets\/[^\.].+/')
+            ->notPath('/assets\/img\/.+/')
             // exclude files
             ->notPath('bin/silex-max')
             ->notName('composer.*')

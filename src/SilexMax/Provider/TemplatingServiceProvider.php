@@ -99,6 +99,22 @@ class TemplatingServiceProvider implements ServiceProviderInterface
             ));
             $am->get('ie_helper')->setTargetPath('assets/js/ie-helper.js');
 
+            // jpeg
+            $jpegs = new GlobAsset($app['assets_dir'] . '/img/*.jpg', [$fm->get('jpegoptim')]);
+            foreach ($jpegs as $jpeg) {
+                $name = basename($jpeg->getSourcePath());
+                $am->set(str_replace('.', '_', "img_$name"), $jpeg);
+                $jpeg->setTargetPath("assets/img/$name");
+            }
+
+            // png
+            $pngs = new GlobAsset($app['assets_dir'] . '/img/*.png', [$fm->get('optipng')]);
+            foreach ($pngs as $png) {
+                $name = basename($png->getSourcePath());
+                $am->set(str_replace('.', '_', "img_$name"), $png);
+                $png->setTargetPath("assets/img/$name");
+            }
+
             return $am;
         }));
 
