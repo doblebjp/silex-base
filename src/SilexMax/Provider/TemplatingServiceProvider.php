@@ -100,19 +100,27 @@ class TemplatingServiceProvider implements ServiceProviderInterface
             $am->get('ie_helper')->setTargetPath('assets/js/ie-helper.js');
 
             // jpeg
-            $jpegs = new GlobAsset($app['assets_dir'] . '/img/*.jpg', [$fm->get('jpegoptim')]);
-            foreach ($jpegs as $jpeg) {
-                $name = basename($jpeg->getSourcePath());
-                $am->set(str_replace('.', '_', "img_$name"), $jpeg);
-                $jpeg->setTargetPath("assets/img/$name");
+            $jpegs = glob($app['assets_dir'] . '/img/*.jpg');
+            foreach ($jpegs as $file) {
+                $name = basename($file);
+                $assetName = str_replace('.', '_', "img_$name");
+                $am->set($assetName, new AssetCache(
+                    new FileAsset($file, [$fm->get('jpegoptim')]),
+                    new FilesystemCache($app['cache_dir'] . '/assetic')
+                ));
+                $am->get($assetName)->setTargetPath("assets/img/$name");
             }
 
             // png
-            $pngs = new GlobAsset($app['assets_dir'] . '/img/*.png', [$fm->get('optipng')]);
-            foreach ($pngs as $png) {
-                $name = basename($png->getSourcePath());
-                $am->set(str_replace('.', '_', "img_$name"), $png);
-                $png->setTargetPath("assets/img/$name");
+            $pngs = glob($app['assets_dir'] . '/img/*.png');
+            foreach ($pngs as $file) {
+                $name = basename($file);
+                $assetName = str_replace('.', '_', "img_$name");
+                $am->set($assetName, new AssetCache(
+                    new FileAsset($file, [$fm->get('optipng')]),
+                    new FilesystemCache($app['cache_dir'] . '/assetic')
+                ));
+                $am->get($assetName)->setTargetPath("assets/img/$name");
             }
 
             return $am;
