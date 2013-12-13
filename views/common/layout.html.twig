@@ -11,9 +11,8 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
 
     <!--[if lt IE 9]>
-      {% javascripts "@ie_helper" filter="?yui_js" output="assets/ie-helper.js" %}
-      <script src="/{{ asset_url }}"></script>
-      {% endjavascripts %}
+      <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
   </head>
 
@@ -36,7 +35,7 @@
     {% javascripts "@custom_js" "@bootstrap_js" filter="?yui_js" output="assets/js/scripts-combined.min.js" %}
     <script src="/{{ asset_url }}"></script>
     {% endjavascripts %}
-    {% if app.debug %}<script src="/assets/js/holder.js"></script>{% endif %}
+    {% if app.debug %}<script src="//cdnjs.cloudflare.com/ajax/libs/holder/2.0/holder.js"></script>{% endif %}
     {% endblock %}
   </body>
 </html>{% endif %}{% endblock %}

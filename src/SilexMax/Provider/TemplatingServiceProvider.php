@@ -90,15 +90,6 @@ class TemplatingServiceProvider implements ServiceProviderInterface
             ));
             $am->get('custom_js')->setTargetPath('assets/js/custom.js');
 
-            $am->set('ie_helper', new AssetCache(
-                new AssetCollection([
-                    new FileAsset($app['twbs_dir'] . '/assets/js/html5shiv.js'),
-                    new FileAsset($app['twbs_dir'] . '/assets/js/respond.min.js'),
-                ]),
-                new FilesystemCache($app['cache_dir'] . '/assetic')
-            ));
-            $am->get('ie_helper')->setTargetPath('assets/js/ie-helper.js');
-
             // jpeg
             $jpegs = glob($app['assets_dir'] . '/img/*.jpg');
             foreach ($jpegs as $file) {

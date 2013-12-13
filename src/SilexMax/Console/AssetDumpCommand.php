@@ -39,11 +39,5 @@ class AssetDumpCommand extends Command
             copy($font, $fontsDir . '/' . basename($font));
         }
         $output->writeln('Done');
-
-        // Helper scripts
-        $output->write('Copying helper scripts ... ');
-        $jsDir = $app['assetic.path_to_web'] . '/assets/js';
-        copy($app['twbs_dir'] . '/assets/js/holder.js', $jsDir . '/holder.js');
-        $output->writeln('Done');
     }
 }
