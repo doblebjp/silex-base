@@ -53,13 +53,16 @@ class TemplatingServiceProvider implements ServiceProviderInterface
         $app['assetic.asset_manager'] = $app->share($app->extend('assetic.asset_manager', function($am, $app) {
             $fm = $app['assetic.filter_manager'];
 
-            $am->set('bootstrap_css', new AssetCache(
-                new FileAsset($app['twbs_dir'] . '/less/bootstrap.less', [$fm->get('lessc')]),
+            $am->set('styles', new AssetCache(
+                new AssetCollection([
+                    new FileAsset($app['twbs_dir'] . '/less/bootstrap.less'),
+                    new GlobAsset($app['assets_dir'] . '/less/*.less'),
+                ], [$fm->get('lessc')]),
                 new FilesystemCache($app['cache_dir'] . '/assetic')
             ));
-            $am->get('bootstrap_css')->setTargetPath('assets/css/bootstrap.css');
+            $am->get('styles')->setTargetPath('assets/css/styles.css');
 
-            $am->set('bootstrap_js', new AssetCache(
+            $am->set('scripts', new AssetCache(
                 new AssetCollection([
                     new FileAsset($app['twbs_dir'] . '/js/affix.js'),
                     new FileAsset($app['twbs_dir'] . '/js/alert.js'),
@@ -73,11 +76,13 @@ class TemplatingServiceProvider implements ServiceProviderInterface
                     new FileAsset($app['twbs_dir'] . '/js/tooltip.js'),
                     new FileAsset($app['twbs_dir'] . '/js/popover.js'),
                     new FileAsset($app['twbs_dir'] . '/js/transition.js'),
+                    new GlobAsset($app['assets_dir'] . '/js/*.js'),
                 ]),
                 new FilesystemCache($app['cache_dir'] . '/assetic')
             ));
-            $am->get('bootstrap_js')->setTargetPath('assets/js/bootstrap.js');
+            $am->get('scripts')->setTargetPath('assets/js/scripts.js');
 
+            /*
             $am->set('custom_css', new AssetCache(
                 new FileAsset($app['assets_dir'] . '/less/custom.less', [$fm->get('lessc')]),
                 new FilesystemCache($app['cache_dir'] . '/assetic')
@@ -89,6 +94,7 @@ class TemplatingServiceProvider implements ServiceProviderInterface
                 new FilesystemCache($app['cache_dir'] . '/assetic')
             ));
             $am->get('custom_js')->setTargetPath('assets/js/custom.js');
+            */
 
             // jpeg
             $jpegs = glob($app['assets_dir'] . '/img/*.jpg');
