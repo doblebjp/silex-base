@@ -47,11 +47,14 @@ class TemplatingServiceProvider implements ServiceProviderInterface
             $fm->set('lessc', new LessFilter($app['node.bin'], $app['node.paths']));
             $fm->set('jpegoptim', new JpegoptimFilter());
             $fm->set('optipng', new OptiPngFilter());
+
             return $fm;
         }));
 
         $app['assetic.asset_manager'] = $app->share($app->extend('assetic.asset_manager', function($am, $app) {
             $fm = $app['assetic.filter_manager'];
+
+            $fm->get('lessc')->addLoadPath(realpath($app['twbs_dir'] . '/less'));
 
             $am->set('styles', new AssetCache(
                 new AssetCollection([
