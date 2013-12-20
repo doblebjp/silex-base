@@ -18,24 +18,24 @@
 
   <body>
     {% block body %}
-    {% include 'common/navbar.html.twig' %}
-    {% block main %}
-    <div class="container">
-      {% block content %}{% endblock %}
-    </div>
-    {% endblock %}
-    {% include 'common/footer.html.twig' %}
+      {% block navbar %}{% include 'common/navbar.html.twig' %}{% endblock navbar%}
+      {% block main %}
+      <div class="container">
+        {% block content %}{% endblock %}
+      </div>
+      {% endblock main %}
+      {% block footer %}{% include 'common/footer.html.twig' %}{% endblock footer %}
 
-    <!-- modal -->
-    <div class="modal fade" id="modal"></div>
-    {% endblock %}
+      <!-- modal -->
+      <div class="modal fade" id="modal"></div>
+    {% endblock body %}
 
     {% block scripts %}
-    <script src="//code.jquery.com/jquery.js"></script>
-    {% javascripts "@scripts" filter="?yui_js" output="assets/js/scripts.min.js" %}
-    <script src="/{{ asset_url }}"></script>
-    {% endjavascripts %}
-    {% if app.debug %}<script src="//cdnjs.cloudflare.com/ajax/libs/holder/2.0/holder.js"></script>{% endif %}
-    {% endblock %}
+      <script src="//code.jquery.com/jquery.js"></script>
+      {% javascripts "@scripts" filter="?yui_js" output="assets/js/scripts.min.js" %}
+      <script src="/{{ asset_url }}"></script>
+      {% endjavascripts %}
+      {% if app.debug %}<script src="//cdnjs.cloudflare.com/ajax/libs/holder/2.0/holder.js"></script>{% endif %}
+    {% endblock scripts %}
   </body>
-</html>{% endif %}{% endblock %}
+</html>{% endif %}{% endblock html %}
