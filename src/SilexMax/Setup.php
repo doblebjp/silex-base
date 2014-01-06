@@ -14,12 +14,12 @@ use SilexMax\Application;
 
 class Setup
 {
-    static public function createApplication()
+    public static function createApplication()
     {
         return new Application();
     }
 
-    static public function registerServices(Application $app)
+    public static function registerServices(Application $app)
     {
         $app->register(new SessionServiceProvider());
         $app->register(new MonologServiceProvider());
@@ -29,7 +29,7 @@ class Setup
         $app->register(new FormServiceProvider());
     }
 
-    static public function loadConfig(Application $app, $path, array $replacements)
+    public static function loadConfig(Application $app, $path, array $replacements)
     {
         foreach (['/global.yml', '/local.yml'] as $configFile) {
             $configPath = $path . $configFile;
@@ -39,7 +39,7 @@ class Setup
         }
     }
 
-    static public function mountControllers(Application $app)
+    public static function mountControllers(Application $app)
     {
 
     }
