@@ -85,25 +85,12 @@ class TemplatingServiceProvider implements ServiceProviderInterface
             ));
             $am->get('scripts')->setTargetPath('assets/js/scripts.js');
 
-            /*
-            $am->set('custom_css', new AssetCache(
-                new FileAsset($app['assets_dir'] . '/less/custom.less', [$fm->get('lessc')]),
-                new FilesystemCache($app['cache_dir'] . '/assetic')
-            ));
-            $am->get('custom_css')->setTargetPath('assets/css/custom.css');
-
-            $am->set('custom_js', new AssetCache(
-                new GlobAsset($app['assets_dir'] . '/js/*.js'),
-                new FilesystemCache($app['cache_dir'] . '/assetic')
-            ));
-            $am->get('custom_js')->setTargetPath('assets/js/custom.js');
-            */
-
             // jpeg
             $jpegs = glob($app['assets_dir'] . '/img/*.jpg');
             foreach ($jpegs as $file) {
                 $name = basename($file);
-                $assetName = str_replace('.', '_', "img_$name");
+                $uid = md5($name);
+                $assetName = preg_replace('/[^a-z0-9_]/i', '_', "img_{$name}_{$uid}");
                 $am->set($assetName, new AssetCache(
                     new FileAsset($file, [$fm->get('jpegoptim')]),
                     new FilesystemCache($app['cache_dir'] . '/assetic')
@@ -115,7 +102,8 @@ class TemplatingServiceProvider implements ServiceProviderInterface
             $pngs = glob($app['assets_dir'] . '/img/*.png');
             foreach ($pngs as $file) {
                 $name = basename($file);
-                $assetName = str_replace('.', '_', "img_$name");
+                $uid = md5($name);
+                $assetName = preg_replace('/[^a-z0-9_]/i', '_', "img_{$name}_{$uid}");
                 $am->set($assetName, new AssetCache(
                     new FileAsset($file, [$fm->get('optipng')]),
                     new FilesystemCache($app['cache_dir'] . '/assetic')
