@@ -33,7 +33,12 @@
       {% block footer %}{% include 'common/footer.html.twig' %}{% endblock footer %}
 
       <!-- modal -->
-      <div class="modal fade" id="modal"></div>
+      <div class="modal fade" id="modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          </div>
+        </div>
+      </div>
     {% endblock body %}
 
     {% block scripts %}
