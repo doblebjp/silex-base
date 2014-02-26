@@ -7,6 +7,7 @@ use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
+use Silex\Provider\SwiftmailerServiceProvider;
 use SilexMax\Provider\TemplatingServiceProvider;
 use SilexMax\Provider\OrmServiceProvider;
 use SilexMax\Provider\FormServiceProvider;
@@ -24,6 +25,7 @@ class Setup
         $app->register(new SessionServiceProvider());
         $app->register(new MonologServiceProvider());
         $app->register(new ServiceControllerServiceProvider());
+        $app->register(new SwiftmailerServiceProvider());
         $app->register(new TemplatingServiceProvider());
         $app->register(new OrmServiceProvider());
         $app->register(new FormServiceProvider());
