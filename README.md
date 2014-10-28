@@ -1,4 +1,4 @@
-silex-max
-=========
+Silex-Base
+==========
 
-Silex boilerplate
+Base project setup on top of Silex framework
