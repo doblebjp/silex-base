@@ -1,43 +1,37 @@
 {
-  "name": "doblebjp/silex-max",
+  "name": "doblebjp/silex-base",
   "description": "Silex boilerplate",
   "keywords": ["silex", "boilerplate"],
   "license": "MIT",
   "require": {
     "php": ">=5.4",
-    "silex/silex": "~1.1",
-    "twig/twig": "~1.15",
+    "silex/silex": "~1.2",
+    "twig/twig": ">=1.8,<2.0-dev",
     "dflydev/doctrine-orm-service-provider": "~1.0",
     "igorw/config-service-provider": "~1.2",
-    "monolog/monolog": "~1.7",
-    "mheap/silex-assetic": "dev-fixlam",
-    "twbs/bootstrap": "~3.0",
-    "knplabs/console-service-provider": "dev-master",
+    "monolog/monolog": "~1.11",
+    "mheap/silex-assetic": "~1.0",
+    "twbs/bootstrap": "~3.2",
+    "knplabs/console-service-provider": "~1.0",
     "leafo/lessphp": "~0.4",
-    "symfony/twig-bridge": "~2.4",
-    "symfony/form": "~2.4",
-    "symfony/yaml": "~2.4",
-    "symfony/security": "~2.4",
-    "symfony/validator": "~2.4",
-    "symfony/finder": "~2.4",
-    "symfony/translation": "~2.4",
-    "symfony/config": "~2.4",
-    "symfony/doctrine-bridge": "~2.4",
-    "dominikzogg/doctrine-orm-manager-registry-provider": "~1.2",
-    "swiftmailer/swiftmailer": "~4.1"
+    "symfony/twig-bridge": "~2.5",
+    "symfony/form": "~2.5",
+    "symfony/yaml": "~2.5",
+    "symfony/security": "~2.5",
+    "symfony/validator": "~2.5",
+    "symfony/finder": "~2.5",
+    "symfony/translation": "~2.5",
+    "symfony/config": "~2.5",
+    "symfony/doctrine-bridge": "~2.5",
+    "saxulum/saxulum-doctrine-orm-manager-registry-provider": "~2.0",
+    "swiftmailer/swiftmailer": "~5.3"
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/doblebjp/Silex-Assetic.git"
-    }
-  ],
   "require-dev": {
     "doctrine/data-fixtures": "~1.0",
-    "symfony/browser-kit": "~2.4",
-    "symfony/css-selector": "~2.4"
+    "symfony/browser-kit": "~2.5",
+    "symfony/css-selector": "~2.5"
   },
-  "bin": ["bin/silex-max"],
+  "bin": ["bin/util"],
   "autoload": {
     "psr-0": {
       "SilexMax": "src/"
