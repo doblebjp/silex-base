@@ -8,13 +8,13 @@ use Silex\Provider\FormServiceProvider as SilexFormServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmExtension;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator;
-use Dominikzogg\Silex\Provider\DoctrineOrmManagerRegistryProvider as ManagerRegistryServiceProvider;
+use Saxulum\DoctrineOrmManagerRegistry\Silex\Provider\DoctrineOrmManagerRegistryProvider;
 
 class FormServiceProvider implements ServiceProviderInterface
 {
     public function register(Application $app)
     {
-        $app->register(new ManagerRegistryServiceProvider());
+        $app->register(new DoctrineOrmManagerRegistryProvider());
 
         $app->register(new ValidatorServiceProvider(), [
             'validator.validator_service_ids' => [
