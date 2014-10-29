@@ -4,7 +4,7 @@
 SERVER_TIMEZONE="Europe/Madrid"
 DOCUMENT_ROOT="web"
 
-# set timezone 
+# set timezone
 echo $SERVER_TIMEZONE | tee /etc/timezone
 dpkg-reconfigure --frontend noninteractive tzdata
 
@@ -16,10 +16,14 @@ apt-get install -y apache2
 
 # php
 apt-get install -y php5 php-apc php5-mysql php5-json php5-intl php5-xdebug
-echo "date.timezone = $SERVER_TIMEZONE" > /etc/php5/mods-available/vagrant.ini
-echo "xdebug.max_nesting_level = 250" >> /etc/php5/mods-available/vagrant.ini
-(cd /etc/php5/cli/conf.d && ln -sf ../../mods-available/vagrant.ini 99-vagrant.ini) 
-(cd /etc/php5/apache2/conf.d && ln -sf ../../mods-available/vagrant.ini 99-vagrant.ini) 
+cat <<CONF > /etc/php5/mods-available/vagrant.ini
+date.timezone = $SERVER_TIMEZONE
+xdebug.max_nesting_level = 250
+error_reporting = E_ALL
+display_errors = 1
+CONF
+(cd /etc/php5/cli/conf.d && ln -sf ../../mods-available/vagrant.ini 99-vagrant.ini)
+(cd /etc/php5/apache2/conf.d && ln -sf ../../mods-available/vagrant.ini 99-vagrant.ini)
 
 # mysql
 DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server
@@ -33,7 +37,7 @@ chmod u+x /usr/local/bin/composer
 # application setup
 rm -rf /var/www/html
 ln -fs "/vagrant/$DOCUMENT_ROOT" /var/www/html
-cd /vagrant 
+cd /vagrant
 composer install
 
 # reload
