@@ -28,6 +28,13 @@ CONF
 # mysql
 DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server
 
+# nodejs and modules
+sudo apt-get install -y nodejs
+npm install -g less
+
+# assets 
+apt-get install -y yui-compressor jpegoptim optipng
+
 # composer
 apt-get install -y curl
 curl -s https://getcomposer.org/installer | php

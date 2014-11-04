@@ -1,2 +1,7 @@
 # app
 debug: true
+
+# assetic
+assetic.options:
+  debug: true
+  auto_dump_assets: true

@@ -36,7 +36,10 @@ db.options:
 # node
 node.bin: /usr/bin/node
 node.paths:
-  - /usr/local/lib/node_modules
+  - /usr/lib/node_modules
+
+# yui-compressor
+yui_compressor.path: /usr/share/yui-compressor/yui-compressor.jar
 
 # orm
 orm.proxies_dir: %root_dir%/data/cache/doctrine
