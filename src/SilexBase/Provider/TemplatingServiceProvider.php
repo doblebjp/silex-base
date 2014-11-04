@@ -1,6 +1,6 @@
 <?php
 
-namespace SilexMax\Provider;
+namespace SilexBase\Provider;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
@@ -26,13 +26,13 @@ class TemplatingServiceProvider implements ServiceProviderInterface
         $app->register(new TwigServiceProvider());
 
         $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
-            $twig->addFilter(new \Twig_SimpleFilter('grid', ['SilexMax\Twig\GridFilter', 'getClass']));
+            $twig->addFilter(new \Twig_SimpleFilter('grid', ['SilexBase\Twig\GridFilter', 'getClass']));
 
             return $twig;
         }));
 
         $app['twig.loader.filesystem'] = $app->share($app->extend('twig.loader.filesystem', function ($loader, $app) {
-            $loader->addPath(__DIR__ . '/../../../views/common', 'SilexMax');
+            $loader->addPath(__DIR__ . '/../../../views/common', 'SilexBase');
 
             return $loader;
         }));
@@ -42,8 +42,8 @@ class TemplatingServiceProvider implements ServiceProviderInterface
         $app->register(new AsseticServiceProvider());
 
         $app['assetic.filter_manager'] = $app->share($app->extend('assetic.filter_manager', function($fm, $app) {
-            $fm->set('yui_css', new CssCompressorFilter('/usr/share/yui-compressor/yui-compressor.jar'));
-            $fm->set('yui_js', new JsCompressorFilter('/usr/share/yui-compressor/yui-compressor.jar'));
+            $fm->set('yui_css', new CssCompressorFilter($app['yui_compressor.path']));
+            $fm->set('yui_js', new JsCompressorFilter($app['yui_compressor.path']));
             $fm->set('lessc', new LessFilter($app['node.bin'], $app['node.paths']));
             $fm->set('jpegoptim', new JpegoptimFilter());
             $fm->set('optipng', new OptiPngFilter());

@@ -1,6 +1,6 @@
 <?php
 
-namespace SilexMax;
+namespace SilexBase;
 
 use Igorw\Silex\ConfigServiceProvider;
 use Silex\Provider\SessionServiceProvider;
@@ -8,10 +8,10 @@ use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\SwiftmailerServiceProvider;
-use SilexMax\Provider\TemplatingServiceProvider;
-use SilexMax\Provider\OrmServiceProvider;
-use SilexMax\Provider\FormServiceProvider;
-use SilexMax\Application;
+use SilexBase\Provider\TemplatingServiceProvider;
+use SilexBase\Provider\OrmServiceProvider;
+use SilexBase\Provider\FormServiceProvider;
+use SilexBase\Application;
 
 class Setup
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace SilexMax;
+namespace SilexBase;
 
 use Silex\Application as SilexApplication;
 use Silex\Application\TwigTrait;

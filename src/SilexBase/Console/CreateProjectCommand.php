@@ -1,6 +1,6 @@
 <?php
 
-namespace SilexMax\Console;
+namespace SilexBase\Console;
 
 use Knp\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -43,8 +43,8 @@ class CreateProjectCommand extends Command
             ->in(__DIR__ . '/../../..')
             ->ignoreDotFiles(false)
             // excluding some directories
-            ->exclude('src/SilexMax')
-            ->exclude('tests/SilexMax')
+            ->exclude('src/SilexBase')
+            ->exclude('tests/SilexBase')
             ->exclude('vendor')
             // excluding these directory contents which are not dotfiles
             ->notPath('/data\/(cache|log|sqlite)\/[^\.].+/')

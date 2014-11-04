@@ -1,6 +1,6 @@
 <?php
 
-namespace SilexMax\Test;
+namespace SilexBase\Test;
 
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\Common\DataFixtures\Loader;

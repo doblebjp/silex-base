@@ -1,6 +1,6 @@
 <?php
 
-namespace SilexMax\Provider;
+namespace SilexBase\Provider;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;

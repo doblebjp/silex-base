@@ -1,6 +1,6 @@
 <?php
 
-namespace SilexMax\Console;
+namespace SilexBase\Console;
 
 use Knp\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

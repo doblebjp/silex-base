@@ -1,6 +1,6 @@
 <?php
 
-namespace SilexMax\Console;
+namespace SilexBase\Console;
 
 use Knp\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -11,7 +11,7 @@ use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-use SilexMax\Provider\OrmServiceProvider;
+use SilexBase\Provider\OrmServiceProvider;
 
 class LoadFixturesCommand extends Command
 {
