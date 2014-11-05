@@ -41,6 +41,6 @@ class LoadFixturesCommand extends Command
         $loader->loadFromDirectory($dir);
         $executor->execute($loader->getFixtures());
 
-        $output->writeln("Loaded fixtures from $dir");
+        $output->writeln("Loaded fixtures from <info>$dir</info>");
     }
 }

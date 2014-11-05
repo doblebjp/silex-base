@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Finder\Finder;
 
 class BoilerplateCommand extends Command
@@ -30,9 +31,10 @@ class BoilerplateCommand extends Command
             throw new \RuntimeException("Invalid destination directory");
         }
 
-        $dialog = $this->getHelperSet()->get('dialog');
+        $helper = $this->getHelper('question');
+        $question = new ConfirmationQuestion("Create project in <info>$dir</info> (y/n)? ", false);
 
-        if (!$dialog->askConfirmation($output, "Create project in <info>$dir</info> (y/n)? ")) {
+        if (!$helper->ask($input, $output, $question)) {
             $output->writeln('Exiting');
             return;
         }
@@ -88,6 +90,6 @@ class BoilerplateCommand extends Command
             $output->writeln($file->getRelativePathname());
         }
 
-        $output->writeln("Project created at $dir");
+        $output->writeln("Project created at <info>$dir</info>");
     }
 }

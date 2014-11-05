@@ -13,9 +13,8 @@ class CompileAssetsCommand extends Command
 {
     public function configure()
     {
-        $this
-            ->setName('app:compile-assets')
-            ->setDescription('Compile front-end assets to public directory');
+        $this->setName('app:compile-assets');
+        $this->setDescription('Compile front-end assets to public directory');
     }
 
     public function execute(InputInterface $input, OutputInterface $output)
@@ -23,14 +22,14 @@ class CompileAssetsCommand extends Command
         $app = $this->getSilexApplication();
 
         // Twig assets
-        $output->write('Building assets ... ');
+        $output->write('<info>Building assets</info> ... ');
         $dumper = $app['assetic.dumper'];
         $dumper->addTwigAssets();
         $dumper->dumpAssets();
-        $output->writeln('Done');
+        $output->writeln('done');
 
         // Fonts
-        $output->write('Copying fonts ... ');
+        $output->write('<info>Copying fonts</info> ..... ');
         $fontsDir = $app['assetic.path_to_web'] . '/assets/fonts';
         if (!file_exists($fontsDir) || !is_dir($fontsDir)) {
             mkdir($fontsDir);
@@ -38,6 +37,6 @@ class CompileAssetsCommand extends Command
         foreach (glob($app['twbs_dir'] . '/fonts/glyphicons-halflings-regular.*') as $font) {
             copy($font, $fontsDir . '/' . basename($font));
         }
-        $output->writeln('Done');
+        $output->writeln('done');
     }
 }
