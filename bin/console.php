@@ -45,9 +45,8 @@ $console->setHelperSet(new HelperSet([
 ]));
 
 $console->addCommands([
-    new SilexBase\Console\CreateProjectCommand(),
-    new SilexBase\Console\FileDirPermissionCommand(),
-    new SilexBase\Console\AssetDumpCommand(),
+    new SilexBase\Console\BoilerplateCommand(),
+    new SilexBase\Console\CompileAssetsCommand(),
     new SilexBase\Console\LoadFixturesCommand(),
 ]);
 

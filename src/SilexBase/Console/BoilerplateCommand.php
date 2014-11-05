@@ -9,14 +9,13 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
 
-class CreateProjectCommand extends Command
+class BoilerplateCommand extends Command
 {
     public function configure()
     {
-        $this
-            ->setName('silex-max:project:create')
-            ->setDescription('Create project')
-            ->addArgument('dir', InputArgument::REQUIRED, 'Specify destination directory');
+        $this->setName('app:boilerplate');
+        $this->setDescription('Create project boilerplate');
+        $this->addArgument('dir', InputArgument::REQUIRED, 'Specify destination directory');
     }
 
     public function execute(InputInterface $input, OutputInterface $output)
@@ -33,7 +32,7 @@ class CreateProjectCommand extends Command
 
         $dialog = $this->getHelperSet()->get('dialog');
 
-        if (!$dialog->askConfirmation($output, "Create project in $dir ? (y/n) ")) {
+        if (!$dialog->askConfirmation($output, "Create project in <info>$dir</info> (y/n)? ")) {
             $output->writeln('Exiting');
             return;
         }
@@ -43,25 +42,22 @@ class CreateProjectCommand extends Command
             ->in(__DIR__ . '/../../..')
             ->ignoreDotFiles(false)
             // excluding some directories
+            ->exclude('.vagrant')
             ->exclude('src/SilexBase')
             ->exclude('tests/SilexBase')
             ->exclude('vendor')
             // excluding these directory contents which are not dotfiles
-            ->notPath('/data\/(cache|log|sqlite)\/[^\.].+/')
-            ->notPath('/web\/assets\/[^\.].+/')
-            ->notPath('/assets\/img\/.+/')
+            ->notPath('#data\/(cache|log|sqlite)\/[^\.].+#')
+            ->notPath('#web\/assets\/[^\.].+#')
+            ->notPath('#assets\/img\/.+#')
             // exclude files
-            ->notPath('bin/silex-max')
             ->notName('composer.*')
             ->notName('*.md')
+            ->notPath('#config\/local\.yml$#')
             // include files
             ->name('*')
-            ->name('.git*')
+            ->name('.gitignore')
             ->name('.htaccess')
-            // exclude files that have .dist copy
-            ->filter(function ($file) {
-                return !file_exists($file->getRealPath() . '.dist');
-            })
             // skip existing files
             ->filter(function ($file) use ($dir) {
                 $pathname = $dir . '/' . $file->getRelativePathname();

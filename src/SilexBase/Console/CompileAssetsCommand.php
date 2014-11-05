@@ -9,13 +9,13 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use SilexBase\Provider\TemplatingServiceProvider;
 
-class AssetDumpCommand extends Command
+class CompileAssetsCommand extends Command
 {
     public function configure()
     {
         $this
-            ->setName('silex-max:asset:dump')
-            ->setDescription('Compile and dump all assets to public directory');
+            ->setName('app:compile-assets')
+            ->setDescription('Compile front-end assets to public directory');
     }
 
     public function execute(InputInterface $input, OutputInterface $output)

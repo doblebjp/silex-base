@@ -32,7 +32,6 @@
     "symfony/css-selector": "~2.5",
     "phpunit/phpunit": "~4.3"
   },
-  "bin": ["bin/util"],
   "autoload": {
     "psr-0": {
       "SilexBase": "src/"

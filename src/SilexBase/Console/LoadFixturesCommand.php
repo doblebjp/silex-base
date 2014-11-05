@@ -17,10 +17,9 @@ class LoadFixturesCommand extends Command
 {
     public function configure()
     {
-        $this
-            ->setName('silex-max:orm:load-fixtures')
-            ->setDescription('Load fixtures from directory')
-            ->addArgument('dir', InputArgument::REQUIRED, 'Specify fixtures directory');
+        $this->setName('app:load-fixtures');
+        $this->setDescription('Load ORM fixtures from directory');
+        $this->addArgument('dir', InputArgument::REQUIRED, 'Specify fixtures directory');
     }
 
     public function execute(InputInterface $input, OutputInterface $output)
