@@ -34,9 +34,9 @@ db.options:
   charset:  utf8
 
 # node
-node.bin: /usr/bin/node
+node.bin: /usr/bin/nodejs
 node.paths:
-  - /usr/lib/node_modules
+  - /usr/local/lib/node_modules
 
 # yui-compressor
 yui_compressor.path: /usr/share/yui-compressor/yui-compressor.jar

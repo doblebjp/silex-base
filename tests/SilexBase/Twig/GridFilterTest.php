@@ -1,6 +1,6 @@
 <?php
 
-use SilexMax\Twig\GridFilter;
+use SilexBase\Twig\GridFilter;
 
 class GridFilterTest extends \PHPUnit_Framework_TestCase
 {

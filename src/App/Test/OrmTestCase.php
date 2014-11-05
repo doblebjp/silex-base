@@ -2,9 +2,9 @@
 
 namespace App\Test;
 
-use SilexMax\Provider\OrmServiceProvider;
-use SilexMax\Test\OrmTestCase as BaseOrmTestCase;
-use SilexMax\Setup;
+use SilexBase\Provider\OrmServiceProvider;
+use SilexBase\Test\OrmTestCase as BaseOrmTestCase;
+use SilexBase\Setup;
 
 class OrmTestCase extends BaseOrmTestCase
 {

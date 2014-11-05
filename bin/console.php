@@ -24,12 +24,12 @@ use Knp\Provider\ConsoleServiceProvider;
 use App\Setup;
 
 $app = Setup::createApplication();
-$app->register(new SilexMax\Provider\TemplatingServiceProvider());
-$app->register(new SilexMax\Provider\OrmServiceProvider());
+$app->register(new SilexBase\Provider\TemplatingServiceProvider());
+$app->register(new SilexBase\Provider\OrmServiceProvider());
 Setup::loadConfig($app, $rootDir . '/config', ['root_dir' => $rootDir]);
 
 $app->register(new ConsoleServiceProvider(), [
-    'console.name'              => 'SilexMax Console',
+    'console.name'              => 'SilexBase Console',
     'console.version'           => '1.0',
     /***/ 'console.project_directory' => getcwd(),
     ///// 'console.project_directory' => __DIR__,
@@ -45,10 +45,10 @@ $console->setHelperSet(new HelperSet([
 ]));
 
 $console->addCommands([
-    new SilexMax\Console\CreateProjectCommand(),
-    new SilexMax\Console\FileDirPermissionCommand(),
-    new SilexMax\Console\AssetDumpCommand(),
-    new SilexMax\Console\LoadFixturesCommand(),
+    new SilexBase\Console\CreateProjectCommand(),
+    new SilexBase\Console\FileDirPermissionCommand(),
+    new SilexBase\Console\AssetDumpCommand(),
+    new SilexBase\Console\LoadFixturesCommand(),
 ]);
 
 $console->run();

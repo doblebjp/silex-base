@@ -15,7 +15,7 @@ apt-get update
 apt-get install -y apache2
 
 # php
-apt-get install -y php5 php-apc php5-mysql php5-json php5-intl php5-xdebug
+apt-get install -y php5 php-apc php5-mysql php5-sqlite php5-json php5-intl php5-xdebug
 cat <<CONF > /etc/php5/mods-available/vagrant.ini
 date.timezone = $SERVER_TIMEZONE
 xdebug.max_nesting_level = 250
@@ -29,7 +29,7 @@ CONF
 DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server
 
 # nodejs and modules
-sudo apt-get install -y nodejs
+sudo apt-get install -y nodejs npm
 npm install -g less
 
 # assets 

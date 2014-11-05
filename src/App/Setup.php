@@ -2,10 +2,10 @@
 
 namespace App;
 
-use SilexMax\Application;
-use SilexMax\Setup as SilexMaxSetup;
+use SilexBase\Application;
+use SilexBase\Setup as SilexBaseSetup;
 
-class Setup extends SilexMaxSetup
+class Setup extends SilexBaseSetup
 {
     static public function mountControllers(Application $app)
     {

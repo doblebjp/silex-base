@@ -1,6 +1,6 @@
 <?php
 
-namespace SilexMax\Twig;
+namespace SilexBase\Twig;
 
 class GridFilter
 {

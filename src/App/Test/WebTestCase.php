@@ -6,7 +6,7 @@ Use App\Setup;
 use Silex\WebTestCase as SilexWebTestCase;
 use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
-use SilexMax\Provider\TemplatingServiceProvider;
+use SilexBase\Provider\TemplatingServiceProvider;
 
 class WebTestCase extends SilexWebTestCase
 {
