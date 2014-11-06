@@ -14,10 +14,8 @@ if (!$loader instanceof Composer\Autoload\ClassLoader) {
     $rootDir = realpath(__DIR__ . '/../../../..');
 }
 
-$loader->add('App', $rootDir . '/src');
-
 use Knp\Provider\ConsoleServiceProvider;
-use App\Setup;
+use SilexBase\Setup;
 
 $app = Setup::createApplication();
 $app->register(new SilexBase\Provider\TemplatingServiceProvider());
