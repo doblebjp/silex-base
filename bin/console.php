@@ -10,6 +10,8 @@ if (!$loader instanceof Composer\Autoload\ClassLoader) {
     if (!$loader instanceof Composer\Autoload\ClassLoader) {
         throw new Exception('Cannot locate autoloader');
     }
+
+    $rootDir = realpath(__DIR__ . '/../../../..');
 }
 
 $loader->add('App', $rootDir . '/src');
