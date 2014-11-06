@@ -2,16 +2,14 @@
 
 // try finding local autoloader
 $loader = @include __DIR__ . '/../vendor/autoload.php';
-if ($loader instanceof Composer\Autoload\ClassLoader) {
-    // local project exists
-    $rootDir = realpath(__DIR__ . '/..');
-} else {
+$rootDir = realpath(__DIR__ . '/..');
+
+if (!$loader instanceof Composer\Autoload\ClassLoader) {
     // try finding parent autoloader
     $loader = @include __DIR__ . '/../../../../vendor/autoload.php';
     if (!$loader instanceof Composer\Autoload\ClassLoader) {
         throw new Exception('Cannot locate autoloader');
     }
-    $rootDir = realpath(__DIR__ . '/../../../..');
 }
 
 $loader->add('App', $rootDir . '/src');

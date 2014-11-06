@@ -56,6 +56,7 @@ class BoilerplateCommand extends Command
             ->notName('composer.*')
             ->notName('*.md')
             ->notPath('#config\/local\.yml$#')
+            ->notPath('#bin\/project#')
             // include files
             ->name('*')
             ->name('.gitignore')
