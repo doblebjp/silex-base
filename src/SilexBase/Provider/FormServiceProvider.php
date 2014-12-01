@@ -14,15 +14,13 @@ class FormServiceProvider implements ServiceProviderInterface
 {
     public function register(Application $app)
     {
-        $app->register(new DoctrineOrmManagerRegistryProvider());
-
         $app->register(new ValidatorServiceProvider(), [
             'validator.validator_service_ids' => [
-                'doctrine.orm.validator.unique' => 'silex_max.unique_entity_validator'
+                'doctrine.orm.validator.unique' => 'unique_entity_validator'
             ]
         ]);
 
-        $app['silex_max.unique_entity_validator'] = $app->share(function () use ($app) {
+        $app['unique_entity_validator'] = $app->share(function () use ($app) {
             return new UniqueEntityValidator($app['doctrine']);
         });
 
@@ -33,6 +31,8 @@ class FormServiceProvider implements ServiceProviderInterface
 
             return $extensions;
         }));
+
+        $app->register(new DoctrineOrmManagerRegistryProvider());
     }
 
     public function boot(Application $app)
