@@ -18,4 +18,12 @@ class FooTest extends OrmTestCase
 
         $this->assertEquals('Test', $foo2->getName());
     }
+
+    public function testValidator()
+    {
+        $foo = new App\Entity\Foo();
+        $errors = $this->validator->validate($foo);
+
+        $this->assertEquals(1, count($errors));
+    }
 }

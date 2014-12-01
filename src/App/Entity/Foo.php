@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @Entity
  */
@@ -41,6 +44,11 @@ class Foo
      * @Column(type="boolean")
      */
     protected $active = true;
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('name', new Assert\NotBlank());
+    }
 
     /**
      * Get id
